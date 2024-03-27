@@ -1,0 +1,43 @@
+<section>
+  <h2>FormControl</h2>
+  <p>
+    Los <strong>FormControl</strong> son clases que se importan de
+
+    <code> '&commat;angular/forms' </code>
+
+    que pueden contener tanto los valores de datos como la información de
+    validación de cualquier elemento del formulario.
+  </p>
+  <p>
+    Cada entrada de formulario que tenga en forma reactiva debe estar vinculada
+    por un control de formulario. Estas son las unidades básicas que forman las
+    formas reactivas.
+  </p>
+</section>
+
+<form class="mb-4">
+  <label class="form-label required" for="name"> Nombre </label>
+  <input
+    type="search"
+    name="name"
+    id="name"
+    placeholder="Buscar..."
+    class="form-control"
+    [formControl]="name"
+  />
+  <app-form-error [control]="name" />
+</form>
+
+@for (animal of filteredAnimals; track animal) {
+<ul>
+  <li>
+    {{ animal }}
+  </li>
+</ul>
+} @empty {
+<div>Sin resultados</div>
+}
+
+<hr />
+
+<p>Valor del formControl: {{ name.value | json }}</p>

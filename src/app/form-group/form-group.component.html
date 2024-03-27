@@ -1,0 +1,75 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
+  DE89370400440532013000
+  <br />
+
+  <fieldset>
+    <legend>Información personal</legend>
+
+    <section>
+      <label class="form-label" for="firstName"> Nombre </label>
+      <input
+        type="text"
+        name="firstName"
+        id="firstName"
+        placeholder="Indique el nombre"
+        class="form-control"
+        formControlName="firstName"
+      />
+      <app-form-error [control]="firstName" />
+    </section>
+
+    <section>
+      <label class="form-label" for="iban"> IBAN </label>
+      <input
+        type="text"
+        name="iban"
+        id="iban"
+        placeholder="ej: ES9121000418450200051332"
+        class="form-control"
+        formControlName="iban"
+      />
+      <app-form-error [control]="iban" />
+    </section>
+  </fieldset>
+
+  <button type="submit" class="mt-2 btn-primary">Enviar</button>
+</form>
+
+<hr />
+
+<p>
+  Para los validadores asincronos, desde la documentación de Angular nos
+  aconsejan que se utilize la validacion "onBlur", para no estar realizando
+  peticiones en cada valueChanges.
+</p>
+
+<p>
+  Los validadores SINCRONOS, ocurren antes que los ASINCRONOS, evitando asi
+  llamadas http innecesarias.
+</p>
+
+<hr />
+
+<div>
+  <p>Validación formulario:</p>
+  <p>
+    {{ profileForm.valid | json }}
+  </p>
+</div>
+
+<div>
+  <p>Valores del formulario:</p>
+  <p>
+    {{ profileForm.value | json }}
+  </p>
+</div>
+
+<hr />
+
+<div>
+  <ul>
+    <li>new FormGroup, FormControl...</li>
+    <li>FormBuilder</li>
+    <li>NonNullableFormBuilder</li>
+  </ul>
+</div>

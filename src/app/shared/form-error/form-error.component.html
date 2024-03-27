@@ -1,0 +1,38 @@
+<!-- REQUIRED -->
+@if (control.hasError('required') && control.invalid && (control.touched ||
+control.dirty) ) {
+<small> Este campo es requerido </small>
+}
+
+<!-- EMAIL -->
+@if (control.hasError('email') && (control.touched || control.dirty) ) {
+<small> Correo electrónico inválido </small>
+}
+
+<!-- MIN_LENGTH -->
+@if (control.hasError('minlength') && (control.touched || control.dirty) ) {
+<small>
+  Este campo debe tener al menos
+  {{ control.errors?.['minlength'].requiredLength }} caracteres pero tiene
+  {{ control.errors?.['minlength'].actualLength }} carácter/es.
+</small>
+}
+
+<!-- MAX_LENGTH -->
+@if (control.hasError('maxlength') && (control.touched || control.dirty) ) {
+<small>
+  Este campo debe tener al máximo
+  {{ control.errors?.['maxlength'].requiredLength }} caracteres pero tiene
+  {{ control.errors?.['maxlength'].actualLength }} carácter/es.
+</small>
+}
+
+<!-- Password -->
+@if (control.hasError('passwordError') && (control.touched || control.dirty) ) {
+<small> Contraseña inválida. </small>
+}
+
+<!-- Iban validator -->
+@if (control.hasError('isIbanInvalid') && (control.touched || control.dirty) ) {
+<small> Iban inválido. </small>
+}
