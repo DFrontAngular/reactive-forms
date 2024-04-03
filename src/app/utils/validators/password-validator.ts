@@ -10,7 +10,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
  * $: Indica el final de la cadena.
  */
 const passwordRegex = new RegExp(
-  /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[ñÑ\-_¿.#¡]).{8,15}$/
+  /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[ñÑ\-_¿.#¡*]).{8,15}$/
 );
 
 export function createPasswordStrengthValidator(): ValidatorFn {

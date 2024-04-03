@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { IbanValidatorService } from '../services/iban-validator.service';
 import { FormErrorComponent } from '../shared/form-error/form-error.component';
+import { createPasswordStrengthValidator } from '../utils/validators/password-validator';
 import { Profile, ProfileForm } from './models/profile-form.form';
 
 @Component({
@@ -38,6 +39,10 @@ export class FormGroupComponent implements OnInit {
       Validators.minLength(3),
       Validators.maxLength(30),
     ]),
+    password: new FormControl('', {
+      // IMPORTANTE LLAMAR A LA FUNCIÓN, NO ES SIMPLEMENTE PONERLA
+      validators: [createPasswordStrengthValidator()],
+    }),
     iban: new FormControl('', {
       validators: [Validators.required],
       asyncValidators: [this.#ibanValidator.validate.bind(this.#ibanValidator)],
@@ -47,11 +52,24 @@ export class FormGroupComponent implements OnInit {
 
   profileForm2 = this.#fb.group<ProfileForm>({
     firstName: this.#fb.control(''),
+    password: this.#fb.control(''),
     iban: this.#fb.control(''),
   });
 
+  // Eso no es posible, porque esta mezclando la forma antigua con la nueva
+  // si queremos usar el [''] debemos quitarle la interfaz
+  // profileForm3 = this.#fb.group<ProfileForm>({
+  //   firstName: [''],
+  //   password: [''],
+  //   iban: [''],
+  // });
+
   get firstName() {
     return this.profileForm.get('firstName') as FormControl<string | null>;
+  }
+
+  get password() {
+    return this.profileForm.get('password') as FormControl<string | null>;
   }
 
   get iban() {
@@ -65,6 +83,9 @@ export class FormGroupComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(30),
       ]),
+      password: new FormControl('', {
+        validators: [createPasswordStrengthValidator],
+      }),
       iban: new FormControl('', {
         validators: [Validators.required],
         asyncValidators: [
