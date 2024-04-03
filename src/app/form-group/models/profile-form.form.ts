@@ -4,3 +4,7 @@ export interface ProfileForm {
   firstName: FormControl<string | null>;
   iban: FormControl<string | null>;
 }
+
+export type Profile = {
+  [key in keyof ProfileForm]: string;
+};

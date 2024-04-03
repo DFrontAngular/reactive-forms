@@ -1,22 +1,20 @@
 <section>
   <h2>FormControl</h2>
   <p>
-    Los <strong>FormControl</strong> son clases que se importan de
-
-    <code> '&commat;angular/forms' </code>
-
-    que pueden contener tanto los valores de datos como la información de
-    validación de cualquier elemento del formulario.
+    El <strong>FormControl</strong> es una clase que se importa de
+    <code>'&commat;angular/forms'</code>, contiene tanto los valores de los
+    inputs como la información de validación (además de muchas otras propiedades
+    que veremos más adelante).
   </p>
   <p>
-    Cada entrada de formulario que tenga en forma reactiva debe estar vinculada
-    por un control de formulario. Estas son las unidades básicas que forman las
-    formas reactivas.
+    Cada input que tenga nuestro formulario debe estar vinculado por un
+    <strong>formControl</strong>. Estas son las unidades básicas de los
+    <strong>Reactive Forms</strong>.
   </p>
 </section>
 
 <form class="mb-4">
-  <label class="form-label required" for="name"> Nombre </label>
+  <label class="form-label" for="name"> Nombre </label>
   <input
     type="search"
     name="name"

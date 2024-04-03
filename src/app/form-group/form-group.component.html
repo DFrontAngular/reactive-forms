@@ -1,75 +1,142 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
-  DE89370400440532013000
-  <br />
-
-  <fieldset>
-    <legend>Información personal</legend>
-
-    <section>
-      <label class="form-label" for="firstName"> Nombre </label>
-      <input
-        type="text"
-        name="firstName"
-        id="firstName"
-        placeholder="Indique el nombre"
-        class="form-control"
-        formControlName="firstName"
-      />
-      <app-form-error [control]="firstName" />
-    </section>
-
-    <section>
-      <label class="form-label" for="iban"> IBAN </label>
-      <input
-        type="text"
-        name="iban"
-        id="iban"
-        placeholder="ej: ES9121000418450200051332"
-        class="form-control"
-        formControlName="iban"
-      />
-      <app-form-error [control]="iban" />
-    </section>
-  </fieldset>
-
-  <button type="submit" class="mt-2 btn-primary">Enviar</button>
-</form>
-
-<hr />
-
-<p>
-  Para los validadores asincronos, desde la documentación de Angular nos
-  aconsejan que se utilize la validacion "onBlur", para no estar realizando
-  peticiones en cada valueChanges.
-</p>
-
-<p>
-  Los validadores SINCRONOS, ocurren antes que los ASINCRONOS, evitando asi
-  llamadas http innecesarias.
-</p>
-
-<hr />
-
-<div>
-  <p>Validación formulario:</p>
+<section>
+  <h2>Form Group</h2>
   <p>
-    {{ profileForm.valid | json }}
+    Generalmente un formulario tiene varios controles relacionados. A través de
+    la clase <strong>FormGroup</strong> tenemos una forma sencilla de agrupar
+    los controles en un solo formulario.
   </p>
-</div>
-
-<div>
-  <p>Valores del formulario:</p>
   <p>
-    {{ profileForm.value | json }}
+    En primer lugar tenemos que crear la propiedad que recogerá el formulario
+    completo y dentro tiene todos los <strong>FormControl</strong> que
+    necesitemos.
   </p>
-</div>
+  <p>
+    Y así tenemos los controles individuales recogidos dentro de nuestro
+    formulario.
+  </p>
+</section>
+
+<!-- FORM -->
+<section>
+  <form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
+    <small> IBAN ejemplo válido: DE89370400440532013000 </small>
+    <br />
+
+    <fieldset>
+      <legend>Información personal</legend>
+
+      <section>
+        <label class="form-label" for="firstName"> Nombre </label>
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          placeholder="Indique el nombre"
+          class="form-control"
+          formControlName="firstName"
+        />
+        <app-form-error [control]="firstName" />
+      </section>
+
+      <section>
+        <label class="form-label" for="iban"> IBAN </label>
+        <input
+          type="text"
+          name="iban"
+          id="iban"
+          placeholder="ej: ES9121000418450200051332"
+          class="form-control"
+          formControlName="iban"
+        />
+        <app-form-error [control]="iban" />
+      </section>
+    </fieldset>
+
+    <button type="submit" class="mt-2 btn btn-primary">Enviar</button>
+  </form>
+</section>
 
 <hr />
 
-<div>
+<section>
+  <h3>FormBuilder</h3>
+  <p>
+    Se trata de un servicio que inyectamos en nuestro componente y nos facilita
+    la creación del formulario formulario. Consta de tres métodos principales.
+  </p>
+
   <ul>
-    <li>new FormGroup, FormControl...</li>
-    <li>FormBuilder</li>
-    <li>NonNullableFormBuilder</li>
+    <li><code>fb.control()</code></li>
+    <li><code>fb.group()</code></li>
+    <li><code>fb.array()</code></li>
   </ul>
-</div>
+
+  <p class="alert alert-primary">
+    La principal diferencia entre el formBuilder y el nonNullableFormBuilder es
+    que al realizar <code>form.reset()</code> el formulario nonNullable restaura
+    el valor del control a su <strong>valor inicial</strong>, en lugar de a
+    <strong>null</strong>
+  </p>
+</section>
+
+<hr />
+
+<section>
+  <h3>Validadores</h3>
+  <p>
+    Estos son los principales validadores que proporciona Angular y están en la
+    clase Validators.
+  </p>
+  <ul>
+    <li>Validators.required.</li>
+    <li>Validators.min(..), (se aplica para números)</li>
+    <li>Validators.max(..), (se aplica para números)</li>
+    <li>Validators.minLength(..), (se aplica para string)</li>
+    <li>Validators.maxLength(..), (se aplica para string)</li>
+    <li>Validators.email(..).</li>
+    <li>
+      Validators.pattern(..), (más utilizado que el del email, ya que permite
+      más personalización)
+    </li>
+    <li>Validators.requiredTrue. (especialmente útil para checkbox)</li>
+  </ul>
+</section>
+
+<section>
+  <h3>Validadores custom</h3>
+  <p>
+    Cuando necesitamos ir más haya de los validadores nativos, podemos crear
+    nuestros propios validadores con las reglas de negocio que sean necesarias.
+  </p>
+  <p>
+    Se pueden aplicar validadores custom a nivel de
+    <strong>FormControl</strong>, pero también tenemos la opción de utilizar un
+    validador que aplique a nivel del <strong>FormGroup</strong> completo.
+  </p>
+</section>
+
+<section>
+  <h3>Async validators</h3>
+  <p>
+    Existen un tipo distinto de validadores. Que son los AsyncValidators. Son
+    especialmente útil cuando necesitamos realizar alguna validación con un
+    servicio asíncrono de nuestro backend.
+  </p>
+</section>
+
+<section>
+  <p>
+    En el formulario que tenemos arriba, el control iban tiene aplicado un
+    asyncValidator.
+  </p>
+  <p>
+    Para los validadores asíncronos, desde la documentación de Angular nos
+    aconsejan que se utilize la validación "onBlur", para no estar realizando
+    peticiones en cada valueChanges.
+  </p>
+
+  <p>
+    Los validadores SÍNCRONOS, ocurren antes que los ASÍNCRONOS, evitando asi
+    llamadas http innecesarias.
+  </p>
+</section>

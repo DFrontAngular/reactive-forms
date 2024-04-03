@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FormErrorComponent } from '../shared/form-error/form-error.component';
 
 @Component({
@@ -19,10 +19,13 @@ export class FormControlComponent implements OnInit {
   animals = ['Perro', 'Gato', 'Pájaro', 'León', 'Pez'];
   filteredAnimals: string[] = this.animals;
 
-  name = new FormControl('', [Validators.required]);
+  name = new FormControl('');
 
   ngOnInit(): void {
+    // Nos podemos suscribir a los cambios del formulario. Este observable emitirá su valor
+    // cada vez que el formControl cambie.
     this.name.valueChanges
+      // muy importante describirnos de los valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((name) => this.filterAnimals(name));
   }
