@@ -11,7 +11,7 @@ import {
 import { IbanValidatorService } from '../services/iban-validator.service';
 import { FormErrorComponent } from '../shared/form-error/form-error.component';
 import { createPasswordStrengthValidator } from '../utils/validators/password-validator';
-import { Profile, ProfileForm } from './models/profile-form.form';
+import { Profile, ProfileForm } from './models/profile.form';
 
 @Component({
   selector: 'app-form-group',

@@ -1,38 +1,65 @@
 <!-- REQUIRED -->
-@if (control.hasError('required') && control.invalid && (control.touched ||
-control.dirty) ) {
+@if (control?.hasError('required') && control?.invalid && (control?.touched ||
+control?.dirty) ) {
 <small> Este campo es requerido </small>
 }
 
+<!-- PATTERN -->
+@if (control?.hasError('pattern') && (control?.touched || control?.dirty) ) {
+<small> Patrón inválido </small>
+}
+
 <!-- EMAIL -->
-@if (control.hasError('email') && (control.touched || control.dirty) ) {
+@if (control?.hasError('email') && (control?.touched || control?.dirty) ) {
 <small> Correo electrónico inválido </small>
 }
 
 <!-- MIN_LENGTH -->
-@if (control.hasError('minlength') && (control.touched || control.dirty) ) {
+@if (control?.hasError('minlength') && (control?.touched || control?.dirty) ) {
 <small>
   Este campo debe tener al menos
-  {{ control.errors?.['minlength'].requiredLength }} caracteres pero tiene
-  {{ control.errors?.['minlength'].actualLength }} carácter/es.
+  {{ control?.errors?.['minlength'].requiredLength }} caracteres pero tiene
+  {{ control?.errors?.['minlength'].actualLength }} carácter/es.
 </small>
 }
 
 <!-- MAX_LENGTH -->
-@if (control.hasError('maxlength') && (control.touched || control.dirty) ) {
+@if (control?.hasError('maxlength') && (control?.touched || control?.dirty) ) {
 <small>
   Este campo debe tener al máximo
-  {{ control.errors?.['maxlength'].requiredLength }} caracteres pero tiene
-  {{ control.errors?.['maxlength'].actualLength }} carácter/es.
+  {{ control?.errors?.['maxlength'].requiredLength }} caracteres pero tiene
+  {{ control?.errors?.['maxlength'].actualLength }} carácter/es.
 </small>
 }
 
 <!-- Password -->
-@if (control.hasError('passwordError') && (control.touched || control.dirty) ) {
+@if (control?.hasError('passwordError') && (control?.touched || control?.dirty)
+) {
 <small> Contraseña inválida. </small>
 }
 
 <!-- Iban validator -->
-@if (control.hasError('isIbanInvalid') && (control.touched || control.dirty) ) {
+@if (control?.hasError('isIbanInvalid') && (control?.touched || control?.dirty)
+) {
 <small> Iban inválido. </small>
+}
+
+<!-- Date validator -->
+@if (control?.hasError('invalidDate') && (control?.touched || control?.dirty) )
+{
+<small>Fecha inválida </small>
+}
+
+<!-- Date previousDate -->
+@if (control?.hasError('limitDate') && (control?.touched || control?.dirty) ) {
+<small>
+  Debes seleccionar una fecha anterior a
+  {{ (control?.errors)!["limitDate"] | date }}
+</small>
+}
+
+<!-- Date previousDate -->
+@if (control?.hasError('isPreviousDate') && (control?.touched || control?.dirty)
+) {
+<small> Debes seleccionar una fecha posterior a hoy. </small>
 }

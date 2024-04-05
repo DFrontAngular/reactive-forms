@@ -1,1 +1,124 @@
-<p>form-array works!</p>
+<section>
+  <h2>Form Array</h2>
+  <p>
+    En la mayoría de los casos, todos los campos de un formulario son conocidos
+    de antemano, por lo que podemos definir un modelo estático para el
+    formulario utilizando un <strong>FormGroup</strong>. Esto es común cuando se
+    trata de formularios con un número predefinido de campos conocidos.
+  </p>
+  <p>
+    Sin embargo,
+    <strong>
+      ¿qué sucede cuando el formulario es más dinámico y no todos los campos son
+      conocidos de antemano?.
+    </strong>
+    Imagina un formulario donde los controles se agregan o eliminan según la
+    interacción del usuario con la interfaz. Por ejemplo, un formulario
+    completamente construido dinámicamente a partir de datos provenientes del
+    backend.
+  </p>
+</section>
+
+<!-- FORM -->
+<section>
+  <form (ngSubmit)="onSubmit()" [formGroup]="studentForm">
+    <fieldset>
+      <legend>Información personal</legend>
+
+      <section class="mb-3">
+        <label class="form-label" for="name"> Nombre </label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Indique el nombre"
+          class="form-control"
+          formControlName="name"
+        />
+        <app-form-error [control]="name" />
+      </section>
+
+      <section class="mb-3">
+        <label class="form-label" for="age"> Fecha de nacimiento </label>
+        <input
+          type="date"
+          name="birthDate"
+          id="birthDate"
+          placeholder="Indique su edad"
+          class="form-control"
+          formControlName="birthDate"
+        />
+        <app-form-error [control]="birthDate" />
+      </section>
+    </fieldset>
+
+    <fieldset formArrayName="address" class="mb-3">
+      <legend>Dirección</legend>
+
+      @for (control of address.controls; track $index) {
+      <div class="mb-4 row" [formGroupName]="$index">
+        <section class="col-4">
+          <label class="form-label" for="street"> Calle </label>
+          <input
+            type="text"
+            name="street"
+            id="street"
+            placeholder="Indique su edad"
+            class="form-control"
+            formControlName="street"
+          />
+          <app-form-error [control]="control.get('street')" />
+        </section>
+
+        <section class="col-3">
+          <label class="form-label" for="zipCode"> Código postal/ ZIP </label>
+          <input
+            type="text"
+            name="zipCode"
+            id="zipCode"
+            placeholder="Indique su código postal/ ZIP"
+            class="form-control"
+            formControlName="zipCode"
+          />
+          <app-form-error [control]="control.get('zipCode')" />
+        </section>
+
+        <section class="col-4">
+          <label class="form-label" for="zipCode">Ciudad </label>
+          <input
+            type="text"
+            name="city"
+            id="city"
+            placeholder="Indique su ciudad"
+            class="form-control"
+            formControlName="city"
+          />
+          <app-form-error [control]="control.get('city')" />
+        </section>
+
+        <section class="col-1 d-flex align-items-end">
+          <button
+            class="btn btn-danger"
+            type="button"
+            (click)="removeAddress($index)"
+          >
+            Borrar
+          </button>
+        </section>
+      </div>
+      }
+
+      <button class="btn btn-success" type="button" (click)="addAddress()">
+        Añadir otra dirección
+      </button>
+    </fieldset>
+
+    <button
+      type="submit"
+      class="mt-2 btn btn-primary"
+      [disabled]="studentForm.invalid"
+    >
+      Enviar
+    </button>
+  </form>
+</section>

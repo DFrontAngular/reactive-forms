@@ -3,3 +3,7 @@
   display: block;
   /* position: absolute; */
 }
+
+small {
+  display: block;
+}
