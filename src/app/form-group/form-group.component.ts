@@ -31,7 +31,7 @@ export class FormGroupComponent implements OnInit {
   // sería tipo any
   profileFormAny!: FormGroup;
 
-  formInitializedWithMethod = this.initializeForm();
+  formInitializedWithMethod = this.#initializeForm();
 
   profileForm = new FormGroup<ProfileForm>({
     firstName: new FormControl('', [
@@ -76,7 +76,7 @@ export class FormGroupComponent implements OnInit {
     return this.profileForm.get('iban') as FormControl<string | null>;
   }
 
-  initializeForm(): FormGroup<ProfileForm> {
+  #initializeForm(): FormGroup<ProfileForm> {
     return new FormGroup<ProfileForm>({
       firstName: new FormControl('', [
         Validators.required,
@@ -84,7 +84,7 @@ export class FormGroupComponent implements OnInit {
         Validators.maxLength(30),
       ]),
       password: new FormControl('', {
-        validators: [createPasswordStrengthValidator],
+        validators: [createPasswordStrengthValidator()],
       }),
       iban: new FormControl('', {
         validators: [Validators.required],
@@ -110,17 +110,51 @@ export class FormGroupComponent implements OnInit {
       return;
     }
 
-    alert(`Nombre: ${this.firstName.value}, Iban: ${this.iban.value}`);
+    alert(JSON.stringify(this.profileForm.value));
   }
 
-  patchForm(profile: Profile) {
+  patchForm() {
     // Si utilizamos setValue debemos proporcionar el objeto completo. Dando error si el modelo
     // que le pasamos no tiene el mismo modelo que el formulario.
+    const profile: Profile = {
+      firstName: 'John',
+      iban: 'DE89370400440532013000',
+      password: 'Aa1234567*',
+    };
     this.profileForm.setValue(profile);
 
     // Al utilizar patchValue podemos asignar solo partes del objeto que queramos
-    this.profileForm.patchValue({
-      firstName: profile.firstName,
+    // this.profileForm.patchValue({
+    //   firstName: profile.firstName,
+    // });
+  }
+
+  removeValidators() {
+    Object.keys(this.profileForm.controls).forEach((controlName) => {
+      const control = this.profileForm.get(controlName);
+
+      if (control) {
+        control.clearValidators();
+        control.clearAsyncValidators();
+        control.updateValueAndValidity();
+      }
+    });
+  }
+
+  addValidators() {
+    Object.keys(this.profileForm.controls).forEach((controlName) => {
+      const control = this.profileForm.get(controlName);
+
+      if (control) {
+        // Queremos utilizar addValidators ya que añade nuevos validadores sin eliminar los
+        // existentes. Si nuestra versión es 11 o inferior no podríamos y tendríamos
+        // que utilizar setValidators, pero este método eliminaría las validaciones existentes.
+        // el propio método setValidators ya lo avisa.
+        control.addValidators(Validators.required);
+        // control.setValidators(Validators.required);
+
+        control.updateValueAndValidity();
+      }
     });
   }
 }

@@ -7,5 +7,5 @@ export interface ProfileForm {
 }
 
 export type Profile = {
-  [key in keyof ProfileForm]: string;
+  [key in keyof ProfileForm]: string | null;
 };

@@ -67,6 +67,40 @@
 
     <button type="submit" class="mt-2 btn btn-primary">Enviar</button>
   </form>
+
+  <section class="d-flex gap-3 pb-3">
+    <button type="button" class="mt-2 btn btn-secondary" (click)="patchForm()">
+      Rellenar formulario
+    </button>
+
+    <button
+      type="button"
+      class="mt-2 btn btn-warning"
+      (click)="profileForm.reset()"
+    >
+      Reiniciar formulario
+    </button>
+
+    <button
+      type="button"
+      class="mt-2 btn btn-info"
+      (click)="removeValidators()"
+    >
+      Eliminar validaciones
+    </button>
+
+    <button
+      type="button"
+      class="mt-2 btn btn-success"
+      (click)="addValidators()"
+    >
+      Añadir validaciones
+    </button>
+  </section>
+
+  <p>
+    {{ profileForm.value | json }}
+  </p>
 </section>
 
 <hr />
@@ -115,10 +149,12 @@
   </ul>
 </section>
 
+<hr />
+
 <section>
   <h3>Validadores custom</h3>
   <p>
-    Cuando necesitamos ir más haya de los validadores nativos, podemos crear
+    Cuando necesitamos ir más allá de los validadores nativos, podemos crear
     nuestros propios validadores con las reglas de negocio que sean necesarias.
   </p>
   <p>
@@ -126,7 +162,15 @@
     <strong>FormControl</strong>, pero también tenemos la opción de utilizar un
     validador que aplique a nivel del <strong>FormGroup</strong> completo.
   </p>
+
+  <p class="alert alert-secondary">
+    Una buena idea es agrupar los validadores que estén relacionados en una
+    misma clase, y exponerlos como métodos estáticos (de la misma forma que usa
+    Angular con su clase Validators.)
+  </p>
 </section>
+
+<hr />
 
 <section>
   <h3>Async validators</h3>
@@ -134,6 +178,16 @@
     Existen un tipo distinto de validadores. Que son los AsyncValidators. Son
     especialmente útil cuando necesitamos realizar alguna validación con un
     servicio asíncrono de nuestro backend.
+  </p>
+</section>
+
+<hr />
+
+<section>
+  <p class="alert alert-danger">
+    Cuando agregamos o eliminamos un validador en tiempo de ejecución, debemos
+    llamar a <strong>updateValueAndValidity()</strong> para que la nueva
+    validación surta efecto.
   </p>
 </section>
 
