@@ -47,6 +47,7 @@
           placeholder="Indique su edad"
           class="form-control"
           formControlName="birthDate"
+          [max]="limitDate"
         />
         <app-form-error [control]="birthDate" />
       </section>
@@ -63,7 +64,7 @@
             type="text"
             name="street"
             id="street"
-            placeholder="Indique su edad"
+            placeholder="Indique su dirección"
             class="form-control"
             formControlName="street"
           />

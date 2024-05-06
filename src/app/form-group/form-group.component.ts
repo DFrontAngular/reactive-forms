@@ -4,7 +4,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -22,7 +21,7 @@ import { Profile, ProfileForm } from './models/profile.form';
 })
 export class FormGroupComponent implements OnInit {
   #fb = inject(FormBuilder);
-  #nonNullableFb = inject(NonNullableFormBuilder);
+  // #nonNullableFb = inject(NonNullableFormBuilder);
 
   #ibanValidator = inject(IbanValidatorService);
 
@@ -53,7 +52,10 @@ export class FormGroupComponent implements OnInit {
   profileForm2 = this.#fb.group<ProfileForm>({
     firstName: this.#fb.control(''),
     password: this.#fb.control(''),
-    iban: this.#fb.control(''),
+    iban: this.#fb.control('', {
+      // TAMBIÉN SE PUEDE INDICAR QUE UN CONTROL ES NO NULLABLE CON EL FORM BUILDER NORMAL
+      nonNullable: true,
+    }),
   });
 
   // Eso no es posible, porque esta mezclando la forma antigua con la nueva
@@ -152,7 +154,7 @@ export class FormGroupComponent implements OnInit {
         // el propio método setValidators ya lo avisa.
         control.addValidators(Validators.required);
         // control.setValidators(Validators.required);
-
+        control.addValidators(createPasswordStrengthValidator());
         control.updateValueAndValidity();
       }
     });

@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormErrorComponent } from '../shared/form-error/form-error.component';
 
 @Component({
@@ -19,7 +19,24 @@ export class FormControlComponent implements OnInit {
   animals = ['Perro', 'Gato', 'Pájaro', 'León', 'Pez'];
   filteredAnimals: string[] = this.animals;
 
-  name = new FormControl('');
+  // FORMA RÁPIDA DE DECLARAR LAS PROPIEDADES DEL FORM CONTROL
+  // DE ESTA FORMA SOLO PODEMOS INDICAR EL VALOR INICIAL Y LOS VALIDADORES
+  name = new FormControl('', [Validators.maxLength(255)]);
+
+  // CON ESTA FORMA PODEMOS INDICAR LAS PROPIEDADES DE UNA FORMA MAS VISUAL
+  // INCLUSO PODEMOS AÑADIR MAS PROPIEDADES QUE DE LA FORMA ANTERIOR NO PODRÍAMOS
+  name2 = new FormControl(
+    {
+      disabled: false,
+      value: '',
+    },
+    {
+      validators: [Validators.maxLength(255)],
+      asyncValidators: [],
+      nonNullable: false,
+      updateOn: 'change',
+    }
+  );
 
   ngOnInit(): void {
     // Nos podemos suscribir a los cambios del formulario. Este observable emitirá su valor

@@ -17,8 +17,7 @@ export function createPasswordStrengthValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value as string;
 
-    const passwordStrength = passwordRegex;
-    const passwordValid = passwordStrength.test(value);
+    const passwordValid = passwordRegex.test(value);
 
     return !passwordValid ? { passwordError: true } : null;
   };

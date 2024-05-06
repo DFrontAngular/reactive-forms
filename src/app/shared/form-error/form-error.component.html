@@ -1,6 +1,5 @@
 <!-- REQUIRED -->
-@if (control?.hasError('required') && control?.invalid && (control?.touched ||
-control?.dirty) ) {
+@if (control?.hasError('required') && (control?.touched || control?.dirty) ) {
 <small> Este campo es requerido </small>
 }
 
@@ -53,13 +52,6 @@ control?.dirty) ) {
 <!-- Date previousDate -->
 @if (control?.hasError('limitDate') && (control?.touched || control?.dirty) ) {
 <small>
-  Debes seleccionar una fecha anterior a
-  {{ (control?.errors)!["limitDate"] | date }}
+  La fecha límite es el {{ (control?.errors)!["limitDate"] | date }}
 </small>
-}
-
-<!-- Date previousDate -->
-@if (control?.hasError('isPreviousDate') && (control?.touched || control?.dirty)
-) {
-<small> Debes seleccionar una fecha posterior a hoy. </small>
 }

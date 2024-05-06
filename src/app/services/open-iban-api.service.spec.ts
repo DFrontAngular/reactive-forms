@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ValidationService } from './validation.service';
+import { OpenIbanApiService } from './open-iban-api.service';
 
 describe('ValidationService', () => {
-  let service: ValidationService;
+  let service: OpenIbanApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ValidationService);
+    service = TestBed.inject(OpenIbanApiService);
   });
 
   it('should be created', () => {

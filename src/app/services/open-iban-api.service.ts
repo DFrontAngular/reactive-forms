@@ -6,7 +6,7 @@ import { Iban } from './models/iban.model';
 @Injectable({
   providedIn: 'root',
 })
-export class ValidationService {
+export class OpenIbanApiService {
   #http = inject(HttpClient);
 
   validateIban(iban: string) {

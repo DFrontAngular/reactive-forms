@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import {
   FormArray,
@@ -18,17 +19,19 @@ import {
 @Component({
   selector: 'app-form-array',
   standalone: true,
-  imports: [ReactiveFormsModule, FormErrorComponent],
+  imports: [ReactiveFormsModule, FormErrorComponent, DatePipe],
   templateUrl: './form-array.component.html',
   styleUrl: './form-array.component.css',
 })
 export class FormArrayComponent implements OnInit {
   #fb = inject(FormBuilder);
 
+  limitDate = '2024-04-07';
+
   studentForm = this.#fb.group<StudentForm>({
     name: this.#fb.control(''),
     birthDate: this.#fb.control(null, {
-      validators: [CustomValidators.limitDate(new Date('2024-01-01'))],
+      validators: [CustomValidators.limitDate(new Date(this.limitDate))],
     }),
     address: this.#fb.array<FormGroup<AddressForm>>([]),
   });

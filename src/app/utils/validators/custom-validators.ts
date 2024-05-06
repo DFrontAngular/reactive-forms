@@ -14,7 +14,7 @@ export function limitDate(date: Date): ValidatorFn {
       return { invalidDate: true };
     }
 
-    if (value >= date) {
+    if (value > date) {
       return { limitDate: date };
     }
 
