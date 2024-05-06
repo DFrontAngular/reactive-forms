@@ -26,15 +26,15 @@
   <app-form-error [control]="name" />
 </form>
 
-@for (animal of filteredAnimals; track animal) {
 <ul>
+  @for (animal of filteredAnimals; track animal) {
   <li>
     {{ animal }}
   </li>
+  } @empty {
+  <li>Sin resultados</li>
+  }
 </ul>
-} @empty {
-<div>Sin resultados</div>
-}
 
 <hr />
 

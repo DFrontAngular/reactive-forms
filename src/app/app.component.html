@@ -52,7 +52,7 @@
     <div class="right-side">
       <div class="pill-group">
         @for (path of routes; track path) {
-        <a class="pill" [routerLink]="path">
+        <a class="pill" [routerLink]="path" routerLinkActive="active">
           <span>{{ path }}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

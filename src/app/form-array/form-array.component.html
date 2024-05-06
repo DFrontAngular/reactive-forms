@@ -9,8 +9,8 @@
   <p>
     Sin embargo,
     <strong>
-      ¿qué sucede cuando el formulario es más dinámico y no todos los campos son
-      conocidos de antemano?.
+      ¿qué sucede cuando el formulario es más dinámico y todos los campos no son
+      conocidos de antemano?
     </strong>
     Imagina un formulario donde los controles se agregan o eliminan según la
     interacción del usuario con la interfaz. Por ejemplo, un formulario
@@ -44,7 +44,6 @@
           type="date"
           name="birthDate"
           id="birthDate"
-          placeholder="Indique su edad"
           class="form-control"
           formControlName="birthDate"
           [max]="limitDate"
@@ -110,7 +109,7 @@
       }
 
       <button class="btn btn-success" type="button" (click)="addAddress()">
-        Añadir otra dirección
+        Añadir dirección
       </button>
     </fieldset>
 

@@ -26,7 +26,7 @@ import {
 export class FormArrayComponent implements OnInit {
   #fb = inject(FormBuilder);
 
-  limitDate = '2024-04-07';
+  limitDate = new Date().toISOString().split('T')[0];
 
   studentForm = this.#fb.group<StudentForm>({
     name: this.#fb.control(''),
