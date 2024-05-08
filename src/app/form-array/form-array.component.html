@@ -52,10 +52,14 @@
       </section>
     </fieldset>
 
+    <!-- // DESDE AQUÍ EMPIEZA FORM ARRAY -->
     <fieldset formArrayName="address" class="mb-3">
       <legend>Dirección</legend>
 
-      @for (control of address.controls; track control.value; let i = $index) {
+      <!-- Utilizando el *ngFor antiguo -->
+      <!-- <div class="" *ngFor="let group of address.controls; let i = index"> -->
+
+      @for (group of address.controls; track group.value; let i = $index) {
       <div class="mb-4 row" [formGroupName]="i">
         <section class="col-4">
           <label class="form-label" for="street"> Calle </label>
@@ -67,11 +71,11 @@
             class="form-control"
             formControlName="street"
           />
-          <app-form-error [control]="control.get('street')" />
+          <app-form-error [control]="group.get('street')" />
         </section>
 
         <section class="col-3">
-          <label class="form-label" for="zipCode"> Código postal/ ZIP </label>
+          <label class="form-label" for="zipCode"> Código postal / ZIP </label>
           <input
             type="number"
             name="zipCode"
@@ -80,7 +84,7 @@
             class="form-control"
             formControlName="zipCode"
           />
-          <app-form-error [control]="control.get('zipCode')" />
+          <app-form-error [control]="group.get('zipCode')" />
         </section>
 
         <section class="col-4">
@@ -93,7 +97,7 @@
             class="form-control"
             formControlName="city"
           />
-          <app-form-error [control]="control.get('city')" />
+          <app-form-error [control]="group.get('city')" />
         </section>
 
         <section class="col-1 d-flex align-items-end">
@@ -113,13 +117,7 @@
       </button>
     </fieldset>
 
-    <button
-      type="submit"
-      class="mt-2 btn btn-primary"
-      [disabled]="studentForm.invalid"
-    >
-      Enviar
-    </button>
+    <button type="submit" class="mt-2 btn btn-primary">Enviar</button>
   </form>
 </section>
 

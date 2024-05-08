@@ -44,7 +44,10 @@ export class FormControlComponent implements OnInit {
     this.name.valueChanges
       // muy importante describirnos de los valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((name) => this.filterAnimals(name));
+      .subscribe((name) => {
+        console.log('Control', name);
+        this.filterAnimals(name);
+      });
   }
 
   filterAnimals(query: string | null) {

@@ -133,9 +133,9 @@ export class FormGroupComponent implements OnInit {
     this.profileForm.setValue(profile);
 
     // Al utilizar patchValue podemos asignar solo partes del objeto que queramos
-    // this.profileForm.patchValue({
-    //   firstName: profile.firstName,
-    // });
+    this.profileForm.patchValue({
+      firstName: profile.firstName,
+    });
   }
 
   removeValidators() {
@@ -163,6 +163,7 @@ export class FormGroupComponent implements OnInit {
         control.addValidators(Validators.required);
         // control.setValidators(Validators.required);
         control.addValidators(createPasswordStrengthValidator());
+        // IMPORTANTE ESTE METODO
         control.updateValueAndValidity();
       }
     });

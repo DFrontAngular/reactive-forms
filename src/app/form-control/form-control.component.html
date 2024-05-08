@@ -13,18 +13,16 @@
   </p>
 </section>
 
-<form class="mb-4">
-  <label class="form-label" for="name"> Nombre </label>
-  <input
-    type="search"
-    name="name"
-    id="name"
-    placeholder="Buscar..."
-    class="form-control"
-    [formControl]="name"
-  />
-  <app-form-error [control]="name" />
-</form>
+<label class="form-label" for="name"> Nombre </label>
+<input
+  type="search"
+  name="name"
+  id="name"
+  placeholder="Buscar..."
+  class="form-control"
+  [formControl]="name"
+/>
+<app-form-error [control]="name" />
 
 <ul>
   @for (animal of filteredAnimals; track animal) {
