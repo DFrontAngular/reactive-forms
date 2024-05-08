@@ -55,8 +55,8 @@
     <fieldset formArrayName="address" class="mb-3">
       <legend>Dirección</legend>
 
-      @for (control of address.controls; track $index) {
-      <div class="mb-4 row" [formGroupName]="$index">
+      @for (control of address.controls; track control.value; let i = $index) {
+      <div class="mb-4 row" [formGroupName]="i">
         <section class="col-4">
           <label class="form-label" for="street"> Calle </label>
           <input
@@ -73,7 +73,7 @@
         <section class="col-3">
           <label class="form-label" for="zipCode"> Código postal/ ZIP </label>
           <input
-            type="text"
+            type="number"
             name="zipCode"
             id="zipCode"
             placeholder="Indique su código postal/ ZIP"
@@ -100,7 +100,7 @@
           <button
             class="btn btn-danger"
             type="button"
-            (click)="removeAddress($index)"
+            (click)="removeAddress(i)"
           >
             Borrar
           </button>
@@ -122,3 +122,5 @@
     </button>
   </form>
 </section>
+
+{{ studentForm.value | json }}

@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, JsonPipe, NgFor } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import {
   FormArray,
@@ -19,7 +19,7 @@ import {
 @Component({
   selector: 'app-form-array',
   standalone: true,
-  imports: [ReactiveFormsModule, FormErrorComponent, DatePipe],
+  imports: [ReactiveFormsModule, FormErrorComponent, DatePipe, JsonPipe, NgFor],
   templateUrl: './form-array.component.html',
   styleUrl: './form-array.component.css',
 })
@@ -47,7 +47,7 @@ export class FormArrayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.populateForm();
+    this.populateForm();
   }
 
   addAddress(address: Address = { city: '', street: '', zipCode: null }) {
@@ -71,11 +71,11 @@ export class FormArrayComponent implements OnInit {
   populateForm() {
     const studentDataFromDb: Student = {
       name: 'John Doe',
-      birthDate: new Date(),
+      birthDate: this.limitDate,
       address: [
         {
           city: 'Sevilla',
-          street: 'Americo Vespucio',
+          street: 'Américo Vespucio',
           zipCode: 41200,
         },
       ],
@@ -83,8 +83,7 @@ export class FormArrayComponent implements OnInit {
 
     this.studentForm.patchValue(studentDataFromDb);
     // MUY IMPORTANTE LLAMAR A CLEAR ANTES, YA QUE DEJA EL FORM ARRAY VACÍO
-    // ASI EVITAMOS QUE SI SE LLAMA A ESTE METODO MUCHAS VECES NO SE REPITE EL LLENADO
-    // DEL FORM ARRAY
+    // ASI EVITAMOS QUE SI SE LLAMA A ESTE MÉTODO MUCHAS VECES NO SE REPITE EL LLENADO DEL FORM ARRAY
     this.address.clear();
     studentDataFromDb.address.forEach((address) => this.addAddress(address));
   }

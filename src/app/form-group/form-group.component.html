@@ -100,11 +100,24 @@
     >
       Añadir validaciones
     </button>
+
+    <button
+      type="button"
+      class="mt-2 btn btn-dark"
+      (click)="profileForm.disable()"
+    >
+      Deshabilitar
+    </button>
   </section>
 
   <p>
     {{ profileForm.value | json }}
   </p>
+  <p>VALIDO: {{ profileForm.valid | json }}</p>
+  <p>INVALIDO: {{ profileForm.invalid | json }}</p>
+  <p>TOUCHED: {{ profileForm.touched | json }}</p>
+  <p>PRISTINE: {{ profileForm.pristine | json }}</p>
+  <p>STATUS: {{ profileForm.status | json }}</p>
 </section>
 
 <hr />

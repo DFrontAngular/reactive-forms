@@ -101,6 +101,7 @@ export class FormGroupComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
+    this.iban.disable();
     if (this.profileForm.invalid) {
       // Se utiliza para marcar a TODOS los descendientes como Touched
       this.profileForm.markAllAsTouched();
@@ -112,7 +113,13 @@ export class FormGroupComponent implements OnInit {
       return;
     }
 
-    alert(JSON.stringify(this.profileForm.value));
+    const values = this.profileForm.value;
+    const raw = this.profileForm.getRawValue();
+    // SI DESHABILITAMOS PARCIALMENTE UN CONTROL, ÉSTE NO SE MOSTRARÁ EN EL FORM.VALUES. PERO SI ES EL FORMULARIO EL QUE ESTÁ DESHABILITADO
+    // POR COMPLETO, SI QUE MOSTRARÁ TODOS LOS VALOREFS
+
+    console.log('VALUES', values);
+    console.log('RAW VALUES', raw);
   }
 
   patchForm() {
@@ -138,6 +145,7 @@ export class FormGroupComponent implements OnInit {
       if (control) {
         control.clearValidators();
         control.clearAsyncValidators();
+        // COMENTARLO Y PROBAR EL EFECTO USÁNDOLO Y NO USÁNDOLO
         control.updateValueAndValidity();
       }
     });

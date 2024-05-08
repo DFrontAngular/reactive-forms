@@ -2,13 +2,13 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export interface StudentForm {
   name: FormControl<string | null>;
-  birthDate: FormControl<Date | null>;
+  birthDate: FormControl<string | null>;
   address?: FormArray<FormGroup<AddressForm>>;
 }
 
 export type Student = {
   name: string | null;
-  birthDate: Date | null;
+  birthDate: string | null;
   address: Address[];
 };
 
